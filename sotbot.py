@@ -34,7 +34,7 @@ def fishtime(update, context):
 
     Crate a timer presing in each item"""
     context.bot.send_photo(chat_id=update.effective_chat.id, photo=imgtimefish, parse_mode= 'Markdown', caption=strfishtime)
-    print('foto enviada a '+update.message.from_user.first_name)
+    print('foto enviada a: '+update.message.from_user.first_name)
 
 def talltales(update, context):
     buttonstalltales=[[Inlinebutton(text='The Shroudbreaker (Quest)', callback_data='theshroudbreakerquest')],
