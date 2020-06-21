@@ -1,5 +1,6 @@
 import telegram
 import logging
+import text
 from telegram.ext import CommandHandler
 from telegram.ext import Updater
 from telegram.ext import InlineQueryHandler
@@ -52,7 +53,7 @@ def urltest(update, context):
     print("link enviado a" + update.effective_chat.first_name + update.effective_chat.last_name)
 
 def inlineresult(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text='yes, it works')
+    context.bot.send_message(chat_id=update.effective_chat.id, text=text.theshroudbreakerquest_text)
     print(update.callback_query.from_user)
     context.bot.answer_callback_query(update.callback_query.id)
 
