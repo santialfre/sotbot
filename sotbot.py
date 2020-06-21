@@ -2,6 +2,8 @@ import telegram
 import logging
 from telegram.ext import CommandHandler
 from telegram.ext import Updater
+from telegram.ext import InlineQueryHandler
+from telegram.ext import CallbackQueryHandler
 
 
 TOKEN='1164376458:AAEI4hOizvBq1TVAVs2zBLQiI4c9HNDGnT8'
@@ -43,18 +45,25 @@ def talltales(update, context):
     Inlinekeyboard_talltales=telegram.InlineKeyboardMarkup(buttonstalltales)
     context.bot.send_message(chat_id=update.effective_chat.id, text= 'Here we have the Tall Tales of '+
     'The Shroudbreaker Arc: \n',reply_markup= Inlinekeyboard_talltales)
-    print("Teclado creado")
+    print(update.inline_query)
 
 def urltest(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, parse_mode='Markdown', text="Para continuar toque [aquí](http://www.google.com/)")
     print("link enviado a" + update.effective_chat.first_name + update.effective_chat.last_name)
 
+def inlineresult(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text='yes, it works')
+    print(update.callback_query.from_user)
+    context.bot.answer_callback_query(update.callback_query.id)
+
+inlineresult_handler=CallbackQueryHandler(inlineresult, pattern='theshroudbreakerquest')
 urltest_handler=CommandHandler('urltest', urltest)
 talltales_handler=CommandHandler('talltales', talltales)
 start_handler=CommandHandler('start', start)
 fish_hundler=CommandHandler('fish', fish)
 fishtime_hundler=CommandHandler('fishtime', fishtime)
 
+dispatcher.add_handler(inlineresult_handler)
 dispatcher.add_handler(urltest_handler)
 dispatcher.add_handler(start_handler)
 dispatcher.add_handler(fish_hundler)
